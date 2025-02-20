@@ -1,0 +1,18 @@
+name: speaches
+services:
+    speaches:
+        ports:
+            - 8007:8000
+        container_name: speaches
+        volumes:
+            - /mnt/d/speaches/hf-hub-cache:/home/ubuntu/.cache/huggingface/hub
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: all
+                          capabilities:
+                              - gpu
+        image: ghcr.io/speaches-ai/speaches:latest-cuda
+        restart: unless-stopped
